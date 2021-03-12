@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  img {
+    width: 250px;
+  }
+</style>
+<body>
+  <div class="container"></div>
+</body>
+
+
+<script>
+  fetch ("https://api.unsplash.com/photos/?client_id=lV2JTyfySvmrz_8ebCy6v8DR9OVas5wYxKLsWE8yemc")
+
+  .then((res) => {
+    const data = res.json();
+    return data;
+  })
+  .then ((data) => {
+    console.log(data);
+    for (let i = 0; i < data.length; i++) {
+          let container = document.querySelector(".container");
+          let img = document.createElement("img");
+          img.setAttribute("src", data[i].urls.small);
+          container.append(img);
+        }
+  });
+
+  // function makeRequest(){
+
+//   xhr = new XMLHttpRequest();
+//   xhr.onload = function(){
+//     let res = JSON.parse(this.response);
+//     console.log(res);
+//   }
+//   ;
+//   xhr.open("GET", url,true);
+//   xhr.send();
+// }
+// makeRequest()
+
+
+</script>
+</html>
