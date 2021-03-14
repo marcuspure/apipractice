@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+
+.result{
+  display:flex;
+  flex-wrap:wrap;
+}
+
+</style>
+<body>
+  <form action="search">
+    <label> search</label>
+    <input type="text">
+    <input type="submit">
+  </form>
+
+  <div class="result">
+    <h1>result</h1>
+  </div>
+</body>
+
+<script>
+let apiKey ='jzT1J9faOVZqU8unvScq4Q1nLBNnWqZK';
+let query = 'dog';
+let url = "https://api.giphy.com/v1/gifs/search?api_key="+apiKey+"&q=";
+
+let form = document.querySelector('form');
+let input = document.querySelector('input[type="text"]')
+let result = document.querySelector('.result');
+
+function search(e){
+e.preventDefault();
+query = input.value;
+makeRequest(query);
+}
+
+function creatGif(git,url){
+  let item = document.createElement('div');
+  let link = document.createElement('a');
+  let img = document.createElement('img');
+
+  link.href = url;
+  img.src = gif;
+
+  result.appendChild(item);
+  item.appendChild(link);
+  link.appendChild(img);
+}
+
+function makeRequest(query){
+  xhr = new XMLHttpRequest();
+
+  xhr.onolad = function(){
+    let response = JSON.parse(this.responseText);
+    console.log(response);
+    response.data.map(function(gif){
+
+      createGif(gif.images.fixed_height_downsampled.url,gif.url)
+    })
+  };
+  xhr.open(
+    "GET",
+   url+query,
+    true
+  );
+  xhr.send();
+}
+
+form.addEventListener('submit',search);
+
+
+
+
+
+</script>
+</html>
