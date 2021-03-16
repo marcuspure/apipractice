@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container"></div>
+</body>
+
+<script>
+window.onload=function(){
+  local('_id');
+}
+
+function local(item){
+fetch ("https://data.tainan.gov.tw/api/3/action/datastore_search?resource_id=6da8e048-3b16-4eca-965f-3a3f4720494a&limit=5")
+
+  .then((res) => {
+    const data = res.json();
+    return data;
+  })
+  .then ((data) => {
+    // console.log(data);  
+    // render(data)
+    // const d = data['result']['fields'][0]
+    // const create = document.createTextNode('local')
+    const local = document.querySelector(".local")
+    console.log(data);  
+    
+    // local.textContent = data['result']['fields'][0]['id']
+    local.textContent = data['result'].records[1]
+    // console.log(data);
+  });
+}
+
+</script>
+</html>
